@@ -1,0 +1,30 @@
+module if__V_3( input clk, input reset, input [31:0]input_bit, input [31:0]zero, input [31:0]array_ref_wire_3, input [31:0]array_ref_m_wire_3,  output [31:0]segment_3_if_V3);
+
+	wire [31:0]res_if_after_delay;
+	wire [31:0]res_if_before_delay;
+	wire [31:0]res_else_after_delay;
+	wire [31:0]res_else_before_delay;
+	reg [31:0]segment_3_reg;
+	assign segment_3_if_V3 = segment_3_reg;
+
+
+
+	If__V_3_if_calculation If__V_3_if_calculation1( input_bit, zero, array_ref_wire_3, array_ref_m_wire_3, res_if_before_delay, clk, reset);
+	If__V_3_else_calculation If__V_3_else_calculation1( input_bit, zero, array_ref_wire_3, array_ref_m_wire_3, res_else_before_delay, clk, reset);
+	always@(posedge clk)begin
+		if(reset)begin
+			segment_3_reg <= 0;
+		end else begin
+			if(input_bit==zero) begin
+				segment_3_reg <= res_if_after_delay;
+			end else begin
+				segment_3_reg <= res_else_after_delay;
+			end
+		end
+	end
+
+
+
+	assign res_else_after_delay = res_else_before_delay;
+	assign res_if_after_delay = res_if_before_delay;
+endmodule
